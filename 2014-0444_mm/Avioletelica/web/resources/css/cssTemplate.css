@@ -1,0 +1,43 @@
+
+#wrapper{
+    width:100%;
+
+}
+
+#top {
+    position: relative;
+    background:rgb(37, 107, 116);
+
+    color: white;
+    padding: 15px;
+    margin: -10px -10px 0px -10px;
+    border-bottom: 1px groove gray;
+}
+
+#content{
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    padding-top: 5px;
+    padding-bottom: 60px;
+
+
+
+}
+
+
+#bottom {
+    position: fixed;
+    height: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: rgb(37, 107, 116);
+    text-align: center;
+}
+body {
+    height: 100%;
+}
+

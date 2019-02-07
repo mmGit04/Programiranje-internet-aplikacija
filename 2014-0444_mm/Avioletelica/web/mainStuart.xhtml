@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                 <h:form>
+
+                     <h:selectOneMenu value="#{stuart.newAirline}"  required="true" requiredMessage="Ovo polje je obavezno">
+                        <f:selectItems value="#{register.lista}"/> 
+
+                    </h:selectOneMenu>
+                    <h:commandButton action="#{stuart.changeAirline}" value="Change Airline"/>
+                </h:form>
+                <span>#{crew.porukaPromena}</span>
+                <h3>Letovi koji nisu zavrseni: </h3>
+                <h:form>
+
+                    <p:dataTable value="#{stuart.prosli}" var="pom"
+                                 styleClass = "guestTab" >
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{pom.start_city},#{pom.start_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city},#{pom.end_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.broj}</f:facet>
+                            #{pom.number}
+                        </p:column>
+                        
+                        
+                        
+                        <p:column>
+                            <f:facet name="header">Prikazi detalje</f:facet>
+                            <h:commandLink value="Detalji"  action="#{stuart.prikaziDetalje(pom)}"/>
+                           
+                        </p:column>
+
+
+                    
+                    </p:dataTable>
+                   
+                  
+                </h:form>
+                
+                <br></br>
+                <br></br>
+                <br></br>
+                
+                <h:form>
+                    <h3>Letovi koji su se zavrsili:</h3>
+                        
+                    <p:dataTable value="#{stuart.buduci}" var="pom"
+                                 styleClass = "guestTab" >
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{pom.start_city},#{pom.start_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city},#{pom.end_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.broj}</f:facet>
+                            #{pom.number}
+                        </p:column>
+                        
+                        
+                        
+                        <p:column>
+                            <f:facet name="header">Vidi detalje</f:facet>
+                            <h:commandLink value="Detalji"  action="#{stuart.prikaziDetalje(pom)}"/>
+                           
+                        </p:column>
+
+
+                    
+                    </p:dataTable>
+                   
+                  
+                </h:form>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h:form>
+                    <h:commandButton action="#{stuart.logout()}" value="Logout"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

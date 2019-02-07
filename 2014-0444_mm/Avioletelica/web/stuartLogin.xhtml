@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Stuart Main</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            
+            <ui:define name="content">
+                <h:form>
+             <h:panelGrid columns="3" id="userPanel1" >
+                            #{labels.username}
+                            <h:inputText value="#{stuart.username}" id="usernameLabel" required="true"
+                                         requiredMessage="Unesite korisničko ime."/>
+                            <p:message for="usernameLabel" ></p:message>
+                            #{labels.password}
+                            <h:inputSecret value="#{stuart.password}" id="passwordLabel">
+                                <f:validateLength minimum="5" />
+                            </h:inputSecret>
+
+                            <p:message for="passwordLabel" />
+
+                            <h:outputText value="      "></h:outputText>
+                            <h:commandButton value=" Prijavi se " action="#{stuart.loginStuart}"></h:commandButton>
+                            <h:outputText value="      " id="messageId" binding="#{stuart.component}" ></h:outputText>
+
+                        </h:panelGrid>
+                    <p:message for="messageId"> </p:message>  
+                    </h:form>
+                
+                
+                <br></br>
+                    <h:form>
+                    <h:commandButton action="registration" value="Registracija novog korisnika"></h:commandButton>
+                    </h:form>
+                <br>
+                    
+                </br>
+                 <h:form>
+                     <h:commandButton action="#{stuart.promenaLozinke}" value="Promena lozinke"/>
+                    </h:form>
+                <br></br>
+                    <h:form>
+                        <h:commandButton action="Guest-search" value="Nastavi kao neregistrovan ucesnik"/>
+                    </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

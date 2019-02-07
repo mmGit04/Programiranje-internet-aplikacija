@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Book a flight</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="3">
+                        #{labels.search}
+                        <h:outputText value="      "></h:outputText>
+                        <h:outputText value="      "></h:outputText>
+
+                        <h:selectOneRadio value="#{guest.direction}" required="true" requiredMessage="Potrebno je da izaberete jednu od dve vrednosti" id="direction">
+                            <f:selectItem itemValue="1" itemLabel="One way"  />
+                            <f:selectItem itemValue="2" itemLabel="Two way" />
+                            <f:ajax  render="cal_end"/>
+                        </h:selectOneRadio>
+                        <h:outputText value="      "></h:outputText>
+                        <p:message for="direction"></p:message>
+
+                        #{labels.start}
+                        <h:inputText value="#{guest.city_start}" id="start"  required="true" requiredMessage="Ovo polje je obavezno"></h:inputText>
+                        <p:message for="start"></p:message>
+                            #{labels.end}
+                        <h:inputText value="#{guest.city_end}" id="end" required="true" requiredMessage="Ovo polje je obavezno" ></h:inputText>
+                        <p:message for="end"></p:message>
+                            #{labels.start_date}
+                        <p:calendar value="#{guest.start_date}"  navigator="true" pages="1" required="true" yearRange="c-0:c+1"  id="cal_start"  requiredMessage="Ovo polje je obavezno"> 
+                            
+                        
+                        </p:calendar>
+                        <p:message for="cal_start"></p:message>
+                            #{labels.end_date}
+                        <p:calendar value="#{guest.end_date}" disabled="#{guest.direction=='1'}"  required="true" navigator="true"  pages="1" yearRange="c-0:c+1" id="cal_end" requiredMessage="Ovo polje je obavezno"/>
+
+
+                        <p:message for="cal_end"></p:message> 
+                            #{labels.person}
+                        <p:selectOneMenu id="person" value="#{guest.person}">
+                            <f:selectItem itemLabel="1" itemValue="1" />
+                            <f:selectItem itemLabel="2" itemValue="2" />
+                            <f:selectItem itemLabel="3" itemValue="3" />
+                            <f:selectItem itemLabel="4" itemValue="4" />
+                            <f:selectItem itemLabel="5" itemValue="5" />
+                            <f:selectItem itemLabel="6" itemValue="6" />
+                            <f:selectItem itemLabel="7" itemValue="7" />
+                            <f:selectItem itemLabel="8" itemValue="8" />
+                        </p:selectOneMenu>
+                        <h:outputText value="      "></h:outputText>
+                            #{labels.direct}
+
+                        <p:selectBooleanCheckbox id="checkbox" value="#{guest.direct}" />
+
+                        <h:outputText value="      "></h:outputText>
+                        <h:commandButton action="#{guest.search}" value="#{labels.search}"/>
+
+                    </h:panelGrid>
+                </h:form>
+                <span>#{guest.poruka}</span>
+                <span>#{guest.porukaDirect}</span>
+                
+                <br></br>
+                <h1>Letovi koji danas krecu sirom sveta:</h1>
+                <p:dataTable value="#{guest.letoviDanasKrecu}" var="pom"
+                                 styleClass = "guestTab" >
+                    <p:column>
+
+                            <f:facet name = "header">Broj leta:</f:facet>
+                            #{pom.number}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{pom.start_city},#{pom.start_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city},#{pom.end_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.duration}</f:facet>
+                                #{pom.duration}
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">#{labels.vreme}</f:facet>
+                            #{pom.start_time}
+                        </p:column>
+                        
+                    </p:dataTable>
+                <h1>Letovi koji danas slecu sirom sveta:</h1>
+                <p:dataTable value="#{guest.letoviDanasSlecu}" var="pom"
+                                 styleClass = "guestTab" >
+                    <p:column>
+
+                            <f:facet name = "header">Broj leta:</f:facet>
+                            #{pom.number}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{pom.start_city},#{pom.start_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city},#{pom.end_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.duration}</f:facet>
+                                #{pom.duration}
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">Vreme sletanja</f:facet>
+                            #{pom.planned_time}
+                        </p:column>
+                        
+                    </p:dataTable>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

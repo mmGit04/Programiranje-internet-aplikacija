@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.Airport" table="airport" catalog="airlinedb" optimistic-lock="version">
+        <id name="idairport" type="java.lang.Integer">
+            <column name="idairport" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <property name="iata" type="string">
+            <column name="IATA" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="45" not-null="true" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="45" not-null="true" />
+        </property>
+        <property name="runwayNum" type="int">
+            <column name="runway_num" not-null="true" />
+        </property>
+        <property name="terminalNum" type="int">
+            <column name="terminal_num" not-null="true" />
+        </property>
+        <set name="flightsForUnexpAirport" table="flight" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="unexp_airport" />
+            </key>
+            <one-to-many class="database.Flight" />
+        </set>
+        <set name="flightsForStartAirport" table="flight" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="start_airport" not-null="true" />
+            </key>
+            <one-to-many class="database.Flight" />
+        </set>
+        <set name="airportCords" table="airport_cord" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="airport" not-null="true" />
+            </key>
+            <one-to-many class="database.AirportCord" />
+        </set>
+        <set name="flightsForEndAirport" table="flight" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="end_airport" not-null="true" />
+            </key>
+            <one-to-many class="database.Flight" />
+        </set>
+        <set name="gateses" table="gates" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="airport" not-null="true" />
+            </key>
+            <one-to-many class="database.Gates" />
+        </set>
+    </class>
+</hibernate-mapping>

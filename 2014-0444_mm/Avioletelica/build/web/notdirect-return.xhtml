@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <h1>Direktni letovi:</h1>
+                <h:form>
+
+                    <p:dataTable value="#{guest.directNot}" var="pom"
+                                 styleClass = "guestTab" >
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{pom.start_city},#{pom.start_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city},#{pom.end_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.duration}</f:facet>
+                                #{pom.duration}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.date}</f:facet>
+                            <h:outputText value = " #{pom.start_date}" >
+                                <f:convertDateTime type="date" pattern = "dd-mm-yyyy" />
+                            </h:outputText>       
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{labels.vreme}</f:facet>
+                                #{pom.start_time}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.free}</f:facet>
+                                #{pom.free}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{labels.rezervisi}</f:facet>
+                            <h:commandLink value="Book"  action="#{guest.rezervisiJedinstvenNot(pom)}"/>
+
+                        </p:column>
+
+
+
+                    </p:dataTable>
+                    
+                </h:form>
+                <span>#{guest.porukaM}</span>
+                
+                <h:form>
+                    <h1>Letovi u odlaznom smeru sa jednim presedanjem:</h1>
+                    <p:dataTable value="#{guest.notDirectNot}" var="pom">
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{pom.start_city1},#{pom.start_country1}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city1},#{pom.end_country1}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.duration}</f:facet>
+                                #{pom.duration1}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.date}</f:facet>
+                            <h:outputText value = " #{pom.start_date1}" >
+                                <f:convertDateTime pattern = "dd-mm-yyyy" />
+                            </h:outputText>       
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{labels.vreme}</f:facet>
+                                #{pom.start_time1}
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city2},#{pom.end_country2}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.duration}</f:facet>
+                                #{pom.duration2}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.date}</f:facet>
+                            <h:outputText value = " #{pom.start_date2}" >
+                                <f:convertDateTime pattern = "dd-mm-yyyy" />
+                            </h:outputText>       
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{labels.vreme}</f:facet>
+                                #{pom.start_time2}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{labels.rezervisi}</f:facet>
+                            <h:commandLink value="Book"  action="#{guest.rezervisiDvaNot(pom)}"/>
+                        </p:column>
+
+
+                    </p:dataTable>
+                </h:form>
+                <span>#{guest.porukaI}</span>
+                
+              
+
+                <h:form>
+                    <h1>Direktni letovi u povratnom smeru:</h1>
+                    <p:dataTable value="#{guest.directReturn}" var="prom">
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{prom.start_city},#{prom.start_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{prom.end_city},#{prom.end_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.duration}</f:facet>
+                                #{prom.duration}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.date}</f:facet>
+                                #{prom.start_date}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{labels.vreme}</f:facet>
+                                #{prom.start_time}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.free}</f:facet>
+                                #{prom.free}
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">#{labels.rezervisi}</f:facet>
+                            <h:commandLink value="Book"  action="#{guest.rezervisiJedinstvenNotRet(prom)}"/>
+                        </p:column>
+
+
+                    </p:dataTable>
+                </h:form>
+                    <span>#{guest.porukaN}</span>
+                    <h:form>
+                <h1>Letovi u povratnom smeru sa jednim presedanjem:</h1>
+                <p:dataTable value="#{guest.notDirectReturn}" var="var">
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.from}</f:facet>
+                        #{var.start_city1},#{var.start_country1}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.To}</f:facet>
+                        #{var.end_city1},#{var.end_country1}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.duration}</f:facet>
+                            #{var.duration1}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.date}</f:facet>
+                        <h:outputText value = " #{var.start_date1}" >
+                            <f:convertDateTime pattern = "dd-mm-yyyy" />
+                        </h:outputText>       
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">#{labels.vreme}</f:facet>
+                            #{var.start_time1}
+                    </p:column>
+                   
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.To}</f:facet>
+                        #{var.end_city2},#{var.end_country2}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.duration}</f:facet>
+                            #{var.duration2}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.date}</f:facet>
+                        <h:outputText value = " #{var.start_date2}" >
+                            <f:convertDateTime pattern = "dd-mm-yyyy" />
+                        </h:outputText>       
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">#{labels.vreme}</f:facet>
+                            #{var.start_time2}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">#{labels.rezervisi}</f:facet>
+                        <h:commandLink value="Book"  action="#{guest.rezervisiDvaNotReturn(var)}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+            </h:form>
+               <span>#{guest.porukaA}</span>
+               <h:form>
+                   
+                   <h:commandButton action="Guest-search" value="Povratak na pretragu" />
+               </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Pilot Main</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+
+                <h:form>
+
+                    <h:selectOneMenu value="#{pilot.newAirline}"  required="true" requiredMessage="Ovo polje je obavezno">
+                        <f:selectItems value="#{register.lista}"/> 
+
+                    </h:selectOneMenu>
+                    <h:commandButton action="#{pilot.changeAirline}" value="Change Airline"/>
+                </h:form>
+                <span>#{pilot.porukaPromena}</span>
+                <br>
+
+                </br>
+                <h:form>
+                    <h:inputText value="#{pilot.brojLeta}"/>
+                    <br></br>
+                    <h:commandButton action="#{pilot.zapocniLet()}" value="Zapocni Let"/>
+
+                </h:form>
+                <span>#{pilot.porukaPoletanje}</span>
+
+                <br></br>
+                <h:form>
+                    <h:commandButton action="#{pilot.logout()}" value="Logout"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

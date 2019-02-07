@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.AirplaneLicence" table="airplane_licence" catalog="airlinedb" optimistic-lock="version">
+        <id name="idairplaneLicence" type="java.lang.Integer">
+            <column name="idairplane_licence" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="airplaneTypes" class="database.AirplaneTypes" fetch="select">
+            <column name="type" not-null="true" />
+        </many-to-one>
+        <property name="licence" type="string">
+            <column name="licence" length="45" not-null="true" />
+        </property>
+        <set name="pilotLicences" table="pilot_licence" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="licence" not-null="true" />
+            </key>
+            <one-to-many class="database.PilotLicence" />
+        </set>
+    </class>
+</hibernate-mapping>

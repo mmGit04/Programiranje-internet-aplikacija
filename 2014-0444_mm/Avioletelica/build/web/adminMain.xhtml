@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Admin Main</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            
+            <ui:define name="content">
+               
+                <span>#{admin.porukaRegister}</span>
+                <h:form>   
+                <br></br>
+                <h1>Zahtevi za registraciju:</h1>
+                <p:dataTable value="#{admin.registrovani}" var="pom">
+                    <p:column>
+                        <f:facet name="header">Ime: </f:facet>
+                        #{pom.firstName}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Prezime: </f:facet>
+                        #{pom.lastName}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Tip korisnika: </f:facet>
+                        #{pom.type}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Avio Kompanija: </f:facet>
+                        #{pom.airline}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Email: </f:facet>
+                        #{pom.email}
+                    </p:column>
+                      <p:column>
+                        <f:facet name="header">Datum rodjenja: </f:facet>
+                        #{pom.birthdate}
+                    </p:column>
+                      <p:column>
+                        <f:facet name="header">Dozvoli registraciju </f:facet>
+                        <h:commandButton action="#{admin.dozvoliReg(pom)}"  value="Add" />
+                    </p:column>
+                    
+                </p:dataTable>
+                </h:form>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h1>Unesite novi aerodrom:</h1>
+                <h:form>
+                    <h:panelGrid columns="3">
+                        Ime aerodroma:
+                        <h:inputText value="#{admin.ime}" id="ime" required="true" requiredMessage="Polje ime aerodroma je obavezno."/>
+                        <p:message for="ime"/>
+                        IATA:
+                        <h:inputText value="#{admin.IATA}" id="IATA" required="true" requiredMessage="Polje IATA je obavezno."/>
+                        <p:message for="IATA"/>
+                        Grad:
+                        <h:inputText value="#{admin.city}" id="city" required="true" requiredMessage="Polje Grad je obavezno."/>
+                        <p:message for="city"/>
+                        Drzava:
+                        <h:inputText value="#{admin.country}" id="country" required="true" requiredMessage="Polje Drzava je obavezno."/>
+                        <p:message for="country"/>
+                        Broj pisti:
+                        <h:inputText value="#{admin.runnum}" id="runway" required="true" requiredMessage="Polje broj pisti je obavezno."/>
+                        <p:message for="runway"/>
+                        Broj terminala:
+                        <h:inputText value="#{admin.ternum}" id="ter" required="true" requiredMessage="Polje broj terminala je obavezno."/>
+                        <p:message for="ter"/>
+                        Dodaj u bazu podataka:
+                        <h:commandButton action="#{admin.dodajAerodrom}" value="Dodaj"/>
+                        <span>#{admin.porukaDodavanje}</span>
+                        
+                        
+                        
+                    </h:panelGrid>
+                </h:form>
+                <h3>Unesite informacije o terminalima i gejtovima za predhodno unet aerodrom</h3>
+                <h:form>
+                    <h:panelGrid columns="3">
+                       
+                        Naziv Terminala:
+                        <h:inputText value="#{admin.terminal}" id="terminal" required="true" requiredMessage="Polje naziv terminala je obavezno."/>
+                        <p:message for="terminal"/>
+                        Naziv gate-a
+                        <h:inputText value="#{admin.gate}" id="kapija" required="true" requiredMessage="Polje naziv gate-a je obavezno."/>
+                        <p:message for="kapija" />
+                        Dodaj informacije u bazu:
+                        <h:commandButton action="#{admin.dodajGate}" value="Dodaj"/>
+                        <span>#{admin.porukaInfo}</span>
+                    </h:panelGrid>
+                </h:form>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h1>Dodajte novu avio kompaniju </h1>
+                <h:form>
+                <h:panelGrid columns="3">
+                    Ime:
+                    <h:inputText value="#{admin.imeKomp}" id="imeK" required="true" requiredMessage="Polje ime kompanije je obavezno."/>
+                    <p:message for="imeK"/>
+                    
+                    Adresa:
+                    <h:inputText value="#{admin.adressKomp}" id="adresaK" required="true" requiredMessage="Polje adresa kompanije je obavezno."/>
+                    <p:message for="adresaK"/>
+                    Zemlja: 
+                    <h:inputText value="#{admin.countryKomp}" id="countryK" required="true" requiredMessage="Polje zemlja kompanije je obavezno."/>
+                    <p:message for="countryK"/>
+                    WebSite:
+                    <h:inputText value="#{admin.webKomp}" id="webK" required="true" requiredMessage="Polje web adresa kompanije je obavezno."/>
+                    <p:message for="webK"/>
+                    Email:
+                    <h:inputText value="#{admin.emailKomp}" id="email" required="true" requiredMessage="Polje email kompanije je obavezno."/>
+                    <p:message for="email"/>
+                    Dodajte informacije o avio kompaniji:
+                    <h:commandButton value="Dodajte" action="#{admin.dodajKompaniju()}"/> 
+                            <span>#{admin.porukaKompanijaAdd}</span>
+                </h:panelGrid>
+                
+                
+                </h:form>
+                
+                <br></br>
+                <br></br>
+                <h2>Promenite podatke o avio kompaniji:</h2>
+                <h:form>
+                    <h:panelGrid columns="3">
+                        Naziv avio kompanije :
+                        <h:inputText value="#{admin.updateKomp}" id="up" required="true" requiredMessage="Polje naziv kompanije je obavezan."/>
+                        <p:message for="up"/>
+                        Podatak koji menjamo:
+                        <h:selectOneMenu value="#{admin.polje}" id="izbor">
+                            <f:selectItem itemValue="1" itemLabel="Ime"/>
+                            <f:selectItem itemValue="2" itemLabel="Adresa"/>
+                            <f:selectItem itemValue="3" itemLabel="Zemlja"/>
+                            <f:selectItem itemValue="4" itemLabel="webSite"/>
+                            <f:selectItem itemValue="5" itemLabel="email"/>
+                            
+                        </h:selectOneMenu>
+                        <p:message for="izbor"/>
+                        Nova vrednost:
+                        <h:inputText value="#{admin.novaVrednost}" id="nova" required="true" requiredMessage="Polje je obavezno."/>
+                        <p:message for="nova"/>
+                        Podesite novu vrednost:
+                        <h:commandButton action="#{admin.promeniKompaniju}" value="Promeni"/>
+                        
+                        <span>#{admin.porukaUpdate}</span>       
+                    </h:panelGrid>
+                </h:form>
+                <h:form>
+                    <h1>Dodajte novu licencu pilotu:</h1>
+                    <h:panelGrid columns="3">
+                        Ime pilota:
+                        <h:inputText value="#{admin.imePilota}" id="iP" required="true" requiredMessage="Polje ime pilota je obavezno."/>
+                        <p:message for="iP"/>
+                        Prezime pilota:
+                        <h:inputText value="#{admin.prezimePilota}" id="pP" required="true" requiredMessage="Polje prezime pilota je obavezno."/>
+                        <p:message for="pP"/>
+                        Licenca:
+                        <h:inputText value="#{admin.licence}" id="lP" required="true" requiredMessage="Polje licenca pilota je obavezno."/>
+                        <p:message for="lP"/>
+                        
+                        Dodaj licencu odgovarajucem pilotu:
+                        <h:commandButton action="#{admin.dodajLicencu()}" value="Dodaj"/>
+                        <span>#{admin.porukaLicenca}</span>
+                    </h:panelGrid>
+                </h:form>
+                <br></br>
+                <br></br>
+                <h2>Izlogujte se:</h2>
+                <h:form>
+                    <p:commandButton action="#{admin.logout()}" value="Logout"/>
+                </h:form>
+                    
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

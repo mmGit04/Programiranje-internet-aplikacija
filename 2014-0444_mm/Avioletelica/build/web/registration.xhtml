@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registration</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="3" >
+                         #{labels.firstname}
+                                <h:inputText value="#{register.firstname}" id="nameLabel" required="true"
+                                             requiredMessage="Polje 'Ime' je obavezno.">
+                                </h:inputText>
+                                <p:message for="nameLabel" ></p:message>
+                                #{labels.lastname}
+                                <h:inputText value="#{register.lastname}" id="surNameLabel" required="true"
+                                             requiredMessage="Polje 'Prezime' je obavezno.">
+                                </h:inputText>
+                                <p:message for="surNameLabel" ></p:message>
+                                #{labels.username}
+                                <h:inputText value="#{register.username}" id="usernameLabel"  required="true"
+                                             requiredMessage="Polje 'Korisničko ime' je obavezno.">
+                                </h:inputText>
+                                <p:message for="usernameLabel" ></p:message>
+                                #{labels.password}
+                                <h:inputSecret value="#{register.password}"  binding="#{passwordComponent}" id="passLabel" validatorMessage="Lozinka mora imati izmedju 8 i 10 karaktera.Minimalan broj velikih slova je 1,minimalan broj malih slova je 3,minimalan broj numerika je 1 i minimalan broj specijalnih znakova je 1 ." required="true" requiredMessage="Polje password je obavezno" >
+                                    <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[a-z])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,10})" />
+                                  
+                                </h:inputSecret>
+
+                                <p:message for="passLabel">
+
+                                </p:message>
+                                #{labels.conpass}
+                                <h:inputSecret value="#{register.conpassword}"  required="true" requiredMessage="Ovo polje je obavezno"  id="confPassLabel">
+                                    <f:validator validatorId="passValidator"/>
+                                    <f:attribute name="otherValue" value="#{passwordComponent.value}" />
+                                </h:inputSecret>
+                                <p:message for="confPassLabel">
+
+                                </p:message>
+                                #{labels.email}
+                                <h:inputText value="#{register.email}" id="email" required="true" requiredMessage="Polje email je obavezno"></h:inputText>
+                                <p:message for="email"/>
+                                #{labels.type}
+                                <h:selectOneMenu value="#{register.type}" id="tip" required="tue" requiredMessage="Polje je obavezno">
+                                    <f:selectItem itemValue="1" itemLabel="Pilot"/>
+                                    <f:selectItem itemValue="4" itemLabel="Stuart"/>
+                                    <f:selectItem itemValue="5" itemLabel="Crew"/>
+                                    
+                                </h:selectOneMenu> 
+                                <p:message for="tip"/>
+                                #{labels.birthDate}
+                                <p:calendar value="#{register.datum}" navigator="true" pages="1" yearRange="c-70:c+0"  id="date"  required="true" requiredMessage="Polje datum rodjenja je obavezno" validator="#{register.validateDate}"></p:calendar>
+                                <p:message for="date"></p:message>
+                                #{labels.kompanije}
+                                <h:selectOneMenu value="#{register.airline}" id="air" required="true" requiredMessage="Ovo polje je obavezno">
+                                    <f:selectItems value="#{register.lista}"/> 
+                                    
+                                    
+                                
+                                </h:selectOneMenu>
+                                <p:message for="air"/>
+                                <h:outputText value="      "></h:outputText>
+                                <h:commandButton value=" Registruj " action="#{register.registerUser}"  ></h:commandButton>
+                               <h:outputText value="      " id="messageId" binding="#{register.component}" ></h:outputText>
+
+                           </h:panelGrid>
+                    <p:message for="messageId"> </p:message>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

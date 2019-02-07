@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Rad Pilota</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            
+            <ui:define name="content">
+                
+                <h:form>
+                    <h:panelGrid columns="2">
+                    #{labels.status}
+                    <h:selectOneMenu value="#{pilot.status}"  >
+                        <f:selectItem itemValue="0" itemLabel="U garazi"/>
+                        <f:selectItem itemValue="1" itemLabel="Poleteo"/>
+                        <f:selectItem itemValue="2" itemLabel="Priprema sletanja"/>
+                        <f:selectItem itemValue="3" itemLabel="Sleteo"/>
+                        <f:selectItem itemValue="4" itemLabel="Prinudno Sletanje"/>
+                    
+                    </h:selectOneMenu>
+                    <h:commandButton value="Promeni status" action="#{pilot.promenaStatusa}"/>
+                    </h:panelGrid>
+                    <span>#{pilot.porukaStatus}</span>
+                </h:form>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h:form>
+                    <h:commandButton action="#{pilot.otkaziLet}" value="Otkazi Let"/>
+                </h:form>
+                <br></br>
+                <span>#{pilot.porukaOtkazi}</span>
+                <br></br>
+                <br></br>
+                <h:form>
+                    <h:panelGrid columns="2">
+                    #{labels.duzina}
+                    <h:inputText value="#{pilot.duzinaPuta}" />
+                    #{labels.brzina}
+                    <h:inputText value="#{pilot.brzina}"/>
+                    <h:commandButton action="#{pilot.azurirajVreme()}" value="Azuriraj ocekivano vreme sletanja"/>
+                    
+                    </h:panelGrid>
+                </h:form>
+                <br></br>
+                <span>#{pilot.porukaAzuriraj}</span>
+                
+                <br></br>
+                <br></br>
+                    <h:form>
+                        <h:commandButton action="#{pilot.logout()}" value="Logout"/>
+                    </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

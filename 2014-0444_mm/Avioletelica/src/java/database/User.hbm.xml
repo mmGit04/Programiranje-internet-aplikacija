@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.User" table="user" catalog="airlinedb" optimistic-lock="version">
+        <id name="iduser" type="java.lang.Integer">
+            <column name="iduser" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="45" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="firstName" length="45" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="45" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" not-null="true" />
+        </property>
+        <property name="type" type="int">
+            <column name="type" not-null="true" />
+        </property>
+        <property name="airline" type="string">
+            <column name="airline" length="45" />
+        </property>
+        <property name="birthdate" type="date">
+            <column name="birthdate" length="10" />
+        </property>
+        <set name="pilotLicences" table="pilot_licence" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pilot" not-null="true" />
+            </key>
+            <one-to-many class="database.PilotLicence" />
+        </set>
+        <set name="flightCrews" table="flight_crew" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="korisnik" not-null="true" />
+            </key>
+            <one-to-many class="database.FlightCrew" />
+        </set>
+    </class>
+</hibernate-mapping>

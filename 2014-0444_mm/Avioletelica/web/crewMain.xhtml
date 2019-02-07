@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Crew</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                
+                <br></br>
+                <h:form>
+                    <h:commandButton action="#{crew.prikaziLetove()}" value="PRIKAZI AKTUELNE LETOVE"/>
+                </h:form>
+                <p:dataTable value="#{crew.letinfo}" var="pom" rendered="#{crew.visible}" rows="10" 
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,20,50"
+                             sortBy="#{pom.start_date}"
+                             sortOrder="ascending" 
+                             >
+                    <p:column>
+                        <f:facet name="header">Flight Number</f:facet>
+                            #{pom.number}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.from}</f:facet>
+                        #{pom.start_city},#{pom.start_country}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.To}</f:facet>
+                        #{pom.end_city},#{pom.end_country}
+                    </p:column>
+                    <p:column>
+
+                        <f:facet name = "header">#{labels.date}</f:facet>
+                        <h:outputText value = " #{pom.start_date}" >
+
+                        </h:outputText>       
+                    </p:column>
+                    <p:column>
+                        <h:form>
+                            <f:facet name = "header">Vidi detalje</f:facet>
+                            <h:commandLink action="#{crew.vidiDetalje(pom)}" value="Detalji"/>
+                        </h:form>
+                    </p:column>
+
+
+
+                </p:dataTable>
+                <h:form>
+                    <h2>Unesite nov avion u flotu :</h2>
+                    <h:dataTable value="#{crew.napravljeni}" var="pom">
+                        <h:column>
+                            <f:facet name="header">Ime aviona</f:facet>
+                                #{pom.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Ime tipa aviona</f:facet>
+                                #{pom.tip}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Ubaci u flotu</f:facet>
+                            <h:commandButton action="#{crew.ubaciFlotu(pom)}" value="ADD"/>
+                        </h:column>
+                        
+
+
+                    </h:dataTable>
+                    <span>#{crew.porukaDodajFlota}</span>
+                </h:form>
+
+                <br></br>
+                <br></br>
+                <br>
+
+                </br>
+                <h2>Iznajmljivanje aviona:</h2>
+                <h:form>
+      <h:panelGrid columns="2">
+                    Proizvodjac aviona:
+                    <h:inputText value="#{crew.proizvodjac}" required="true" requiredMessage="Polje proizvodjac aviona je obavezno"/>
+                    Model aviona:
+                    <h:inputText value="#{crew.modelAviona}"/>
+                    Minimalan broj sedista
+                    <h:inputText value="#{crew.brojsedista}"/>
+                    Datum od kog se inznajmljuje:
+                    <p:calendar value="#{guest.start_date}"  navigator="true" pages="1" required="true" yearRange="c-0:c+1"  id="cal_start"  requiredMessage="Ovo polje je obavezno"> 
+
+
+                    </p:calendar>
+                    Datum do kog se iznajmljuje:
+                    <p:calendar value="#{guest.end_date}" disabled="#{guest.direction=='1'}"  required="true" navigator="true"  pages="1" yearRange="c-0:c+1" id="cal_end" requiredMessage="Ovo polje je obavezno"/>
+
+
+                 
+                    <h:commandButton action="#{crew.dostupni}" value="Prikazi slobodne avione"/>
+                </h:panelGrid>
+        </h:form>
+                
+                <h:form>
+        <h:dataTable value="#{crew.pom}" var="pom" rendered="#{crew.vidljivo}">
+            <h:column>
+                <f:facet name="header">Ime aviona</f:facet>
+                #{pom.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ime kompanije kojoj avion pripada</f:facet>
+                #{pom.nameC}
+            </h:column>
+            <h:column>
+                
+                <f:facet name="header">Ponuda</f:facet>
+                <h:inputText value="#{pom.ponuda}"/>
+            </h:column>
+            
+          
+            
+            <h:column>
+               <f:facet name="header">Daj ponudu</f:facet>
+            <h:commandLink action="#{crew.dajPonudu(pom)}"  value="ponuda"/> 
+            </h:column>
+        
+        </h:dataTable>
+                </h:form>   
+                <span>#{crew.porukaRez}</span>
+                <br></br>
+                <br></br>
+                
+                <h:form>
+                    <h:commandButton action="#{crew.mojePonude()}" value="Prikazi moje rezervacije"/>
+                </h:form>
+                <h:form> 
+                    <h:dataTable value="#{crew.mojeP}" var="pom" rendered="#{crew.info}">
+                    <h:column>
+                        <f:facet name="header">Ime kompanije</f:facet>
+                        #{pom.nameK}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Ime aviona</f:facet>
+                        #{pom.nameA}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Ponuda</f:facet>
+                        #{pom.ponuda}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Odobri</f:facet>
+                        <h:commandButton action="#{crew.odobri(pom)}" value="Odobri"/>
+                    </h:column>
+                    
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                
+                        <br></br>
+                        <h:commandButton action="#{crew.logout()}" value="Logout"/>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                            
+                </h:dataTable>
+                    </h:form>              
+                             
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

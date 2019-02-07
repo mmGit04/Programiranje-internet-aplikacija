@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.Rezervacije" table="rezervacije" catalog="airlinedb" optimistic-lock="version">
+        <id name="idrezervacije" type="java.lang.Integer">
+            <column name="idrezervacije" />
+            <generator class="identity" />
+        </id>
+        <property name="ime" type="string">
+            <column name="ime" length="45" not-null="true" />
+        </property>
+        <property name="prezime" type="string">
+            <column name="prezime" length="45" not-null="true" />
+        </property>
+        <property name="passport" type="int">
+            <column name="passport" not-null="true" />
+        </property>
+        <property name="people" type="int">
+            <column name="people" not-null="true" />
+        </property>
+        <property name="number" type="int">
+            <column name="number" not-null="true" />
+        </property>
+        <property name="flight" type="int">
+            <column name="flight" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

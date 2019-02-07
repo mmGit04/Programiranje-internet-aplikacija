@@ -1,0 +1,11 @@
+#home-table{
+   margin: auto;
+    
+}
+table{
+    border-spacing: 20px;
+}
+
+body {
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(145,253,255,1) 0%, rgba(145,253,255,1) 26%, rgba(0,128,128,1) 100%);
+}

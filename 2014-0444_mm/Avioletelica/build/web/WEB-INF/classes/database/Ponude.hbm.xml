@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.Ponude" table="ponude" catalog="airlinedb" optimistic-lock="version">
+        <id name="idponude" type="java.lang.Integer">
+            <column name="idponude" />
+            <generator class="identity" />
+        </id>
+        <property name="kupac" type="int">
+            <column name="kupac" not-null="true" />
+        </property>
+        <property name="prodavac" type="int">
+            <column name="prodavac" not-null="true" />
+        </property>
+        <property name="avion" type="int">
+            <column name="avion" not-null="true" />
+        </property>
+        <property name="ponuda" type="double">
+            <column name="ponuda" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="odobreno" type="int">
+            <column name="odobreno" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Detaljiii</title>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyB-Ghiil1DUk6JV8n8BBVsJ78KzqFYBALA"
+        type="text/javascript" ></script>
+    </h:head> 
+    <body> 
+        <p:dataTable value="#{crew.currFlight}" var="pom">
+            <p:column>
+                <f:facet name="header">Number</f:facet>
+                #{pom.number}
+            </p:column>
+            <p:column>
+                <f:facet name="header">From</f:facet>
+                #{pom.start_city},,<br></br>#{pom.start_country},,<br></br>#{pom.start_air}
+            </p:column>
+            <p:column>
+                <f:facet name="header">To</f:facet>
+                #{pom.end_city},<br></br> #{pom.end_country},<br></br>#{pom.end_air}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Start Gate</f:facet>
+               #{pom.start_gate}
+            </p:column>
+            <p:column>
+                <f:facet name="header">End Gate</f:facet>
+               #{pom.end_gate}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Duration</f:facet>
+               #{pom.duration}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Free space</f:facet>
+               #{pom.reservation}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Status</f:facet>
+               #{pom.status}
+            </p:column>
+        <p:column>
+                <f:facet name="header">Carter</f:facet>
+               #{pom.carter}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Canceled</f:facet>
+               #{pom.canceled}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Airplane</f:facet>
+               #{pom.airplane}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Start date</f:facet>
+               #{pom.start_date}<br></br>#{pom.start_time}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Planned date</f:facet>
+               #{pom.planned_date}<br></br>#{pom.planned_time}
+            </p:column>
+            <p:column>
+                <f:facet name="header">End date</f:facet>
+               #{pom.end_time}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Expect date</f:facet>
+               #{pom.expect_time}
+            </p:column>
+            
+        </p:dataTable>
+        <p:panel header="gmap exemple">
+           
+          <h:form>
+            <p:gmap center="44.7866,30.707417"  model="#{crew.mapModel}" zoom="3" type="HYBRID" style="width:600px;height:400px" />
+          </h:form>
+
+         
+        </p:panel>
+    </body> 
+
+</html>
+

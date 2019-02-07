@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Detatils about flight </title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+
+                    <p:dataTable value="#{stuart.lista}" var="pom"  >
+                                
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.from}</f:facet>
+                            #{pom.start_city},#{pom.start_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.To}</f:facet>
+                            #{pom.end_city},#{pom.end_country}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.duration}</f:facet>
+                                #{pom.duration}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.date}</f:facet>
+                            <h:outputText value = " #{pom.start_date}" >
+                                <f:convertDateTime pattern = "dd-mm-yyyy" />
+                            </h:outputText>       
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">#{labels.vreme}</f:facet>
+                            #{pom.start_time}
+                        </p:column>
+                        <p:column>
+
+                            <f:facet name = "header">#{labels.free}</f:facet>
+                                #{pom.free}
+                        </p:column>
+                        
+
+                    </p:dataTable>
+                    
+                   
+                    <h:outputText value="      " id="messageId" binding="#{guest.component}" ></h:outputText>
+                    <p:message for="messageId"> </p:message>
+                </h:form>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h:form>
+                    <h:commandButton action="#{stuart.logout()}" value="Logout"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

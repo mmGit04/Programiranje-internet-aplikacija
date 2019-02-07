@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.AirplaneTypes" table="airplane_types" catalog="airlinedb" optimistic-lock="version">
+        <id name="idairplaneTypes" type="java.lang.Integer">
+            <column name="idairplane_types" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="airplaneMaker" class="database.AirplaneMaker" fetch="select">
+            <column name="maker" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <property name="licence" type="string">
+            <column name="licence" length="45" not-null="true" />
+        </property>
+        <property name="passNum" type="int">
+            <column name="pass_num" not-null="true" />
+        </property>
+        <set name="airplanes" table="airplane" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="airplane_type" not-null="true" />
+            </key>
+            <one-to-many class="database.Airplane" />
+        </set>
+        <set name="airplaneLicences" table="airplane_licence" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="type" not-null="true" />
+            </key>
+            <one-to-many class="database.AirplaneLicence" />
+        </set>
+    </class>
+</hibernate-mapping>

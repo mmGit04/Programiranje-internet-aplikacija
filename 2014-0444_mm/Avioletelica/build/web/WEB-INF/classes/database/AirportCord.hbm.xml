@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.AirportCord" table="airport_cord" catalog="airlinedb" optimistic-lock="version">
+        <id name="idairportCord" type="java.lang.Integer">
+            <column name="idairport_cord" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="airport" class="database.Airport" fetch="select">
+            <column name="airport" not-null="true" />
+        </many-to-one>
+        <property name="lat" type="double">
+            <column name="lat" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="lng" type="double">
+            <column name="lng" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

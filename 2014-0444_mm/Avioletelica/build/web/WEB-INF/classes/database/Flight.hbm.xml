@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2017 3:10:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="database.Flight" table="flight" catalog="airlinedb" optimistic-lock="version">
+        <id name="idflight" type="java.lang.Integer">
+            <column name="idflight" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="airplane" class="database.Airplane" fetch="select">
+            <column name="airplane" not-null="true" />
+        </many-to-one>
+        <many-to-one name="airportByUnexpAirport" class="database.Airport" fetch="select">
+            <column name="unexp_airport" />
+        </many-to-one>
+        <many-to-one name="airportByStartAirport" class="database.Airport" fetch="select">
+            <column name="start_airport" not-null="true" />
+        </many-to-one>
+        <many-to-one name="airportByEndAirport" class="database.Airport" fetch="select">
+            <column name="end_airport" not-null="true" />
+        </many-to-one>
+        <property name="number" type="int">
+            <column name="number" not-null="true" />
+        </property>
+        <property name="duration" type="string">
+            <column name="duration" length="45" not-null="true" />
+        </property>
+        <property name="expectTime" type="timestamp">
+            <column name="expect_time" length="19" not-null="true" />
+        </property>
+        <property name="endTime" type="timestamp">
+            <column name="end_time" length="19" not-null="true" />
+        </property>
+        <property name="startGate" type="int">
+            <column name="start_gate" not-null="true" />
+        </property>
+        <property name="endGate" type="int">
+            <column name="end_gate" not-null="true" />
+        </property>
+        <property name="carter" type="java.lang.Byte">
+            <column name="carter" />
+        </property>
+        <property name="canceled" type="java.lang.Byte">
+            <column name="canceled" />
+        </property>
+        <property name="reservation" type="java.lang.Integer">
+            <column name="reservation" />
+        </property>
+        <property name="startDate" type="date">
+            <column name="start_date" length="10" />
+        </property>
+        <property name="plannedDate" type="date">
+            <column name="planned_date" length="10" />
+        </property>
+        <property name="startTime" type="time">
+            <column name="start_time" length="8" />
+        </property>
+        <property name="plannedTime" type="time">
+            <column name="planned_time" length="8" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <set name="reservations" table="reservation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="flight" not-null="true" />
+            </key>
+            <one-to-many class="database.Reservation" />
+        </set>
+        <set name="radarFlights" table="radar_flight" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="let" not-null="true" />
+            </key>
+            <one-to-many class="database.RadarFlight" />
+        </set>
+        <set name="flightCrews" table="flight_crew" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="let" not-null="true" />
+            </key>
+            <one-to-many class="database.FlightCrew" />
+        </set>
+    </class>
+</hibernate-mapping>

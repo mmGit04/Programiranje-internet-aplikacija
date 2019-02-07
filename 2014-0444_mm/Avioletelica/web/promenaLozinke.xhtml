@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Promena Lozinke</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <h3>Promena Lozinke</h3>
+                <span>#{change.porukaPromena}</span>
+                <h:form>
+                    <h:panelGrid columns="3">
+                        #{labels.username}
+                        <h:inputText value="#{change.username}" id="usernameLabel" required="true"
+                                     requiredMessage="Unesite korisničko ime."/>
+                        <p:message for="usernameLabel" ></p:message>
+                            #{labels.oldPassword}
+                        <h:inputSecret value="#{change.password}" id="oldPassLabel" required="true"
+                                       requiredMessage="Unesite trenutnu šifru.">
+                            <f:validateLength minimum="5" />
+                        </h:inputSecret>
+                        <p:message for="oldPassLabel"></p:message>
+                            #{labels.newPassword}
+                        <h:inputSecret value="#{change.newPass}" validatorMessage="Lozinka mora imati izmedju 8 i 10 karaktera.Minimalan broj velikih slova je 1,minimalan broj malih slova je 3,minimalan broj numerika je 1 i minimalan broj specijalnih znakova je 1 ." id="newPassLabel">
+                            <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[a-z])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,10})" />
+
+                        </h:inputSecret>
+
+                        <p:message for="newPassLabel">
+
+                        </p:message>
+                        #{labels.conPassword}
+                        <h:inputSecret value="#{change.conPass}" id="confPassLabel">
+                            <f:validateLength minimum="5" />
+                        </h:inputSecret>
+
+                        <p:message for="confPassLabel">
+
+                        </p:message>
+
+                        <h:outputText value="      "></h:outputText>
+                        <h:commandButton value=" Promeni lozinku " action="#{change.changePass}"  ></h:commandButton>
+
+
+                    </h:panelGrid>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
